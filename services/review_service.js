@@ -1,6 +1,10 @@
-const review = require('../models/review')
+const { Review } = require("../models/");
 
 const getReviews = async (req, res) => {
-    // TODO: Fix query
-    const reviews = await review.findAll()
-}
+  const reviews = await Review.findAll();
+  res.json(reviews);
+};
+
+module.exports = {
+  getReviews,
+};
