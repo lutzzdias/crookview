@@ -6,4 +6,6 @@ const router = Router();
 router.get("/", service.getReviews);
 router.get("/:id", service.getReviewById);
 
+router.post("/", service.createReview);
+
 module.exports = router;

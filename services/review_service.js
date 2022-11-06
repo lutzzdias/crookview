@@ -13,7 +13,20 @@ const getReviewById = async (req, res) => {
   else return res.status(200).json(review);
 };
 
+const createReview = async (req, res) => {
+  const { title, body, stars, likeCount, date } = req.body;
+  const newReview = await Review.create({
+    title: title,
+    body: body,
+    stars: stars,
+    like_count: likeCount,
+    date: date,
+  });
+  res.status(201).json(newReview);
+};
+
 module.exports = {
   getReviews,
   getReviewById,
+  createReview,
 };
