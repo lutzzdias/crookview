@@ -5,8 +5,7 @@ const getReviews = async (req, res) => {
     const reviews = await Review.findAll();
     res.status(200).json(reviews);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "An unexpected error ocurred" });
+    return handleError(error);
   }
 };
 
@@ -20,8 +19,7 @@ const getReviewById = async (req, res) => {
 
     return res.status(200).json(review);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "An unexpected error ocurred" });
+    return handleError(error);
   }
 };
 
@@ -37,8 +35,7 @@ const createReview = async (req, res) => {
     });
     res.status(201).json(newReview);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "An unexpected error ocurred" });
+    return handleError(error);
   }
 };
 
@@ -60,9 +57,13 @@ const updateReview = async (req, res) => {
     );
     return res.status(200).json(result);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "An unexpected error ocurred" });
+    return handleError(error);
   }
+};
+
+const handleError = (error) => {
+  console.log(error);
+  return res.status(500).json({ error: error.message });
 };
 
 module.exports = {
