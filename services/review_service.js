@@ -5,7 +5,7 @@ const getReviews = async (req, res) => {
     const reviews = await Review.findAll();
     res.status(200).json(reviews);
   } catch (error) {
-    return handleError(error);
+    return handleError(error, res);
   }
 };
 
@@ -19,7 +19,7 @@ const getReviewById = async (req, res) => {
 
     return res.status(200).json(review);
   } catch (error) {
-    return handleError(error);
+    return handleError(error, res);
   }
 };
 
@@ -35,7 +35,7 @@ const createReview = async (req, res) => {
     });
     res.status(201).json(newReview);
   } catch (error) {
-    return handleError(error);
+    return handleError(error, res);
   }
 };
 
@@ -57,11 +57,27 @@ const updateReview = async (req, res) => {
     );
     return res.status(200).json(result);
   } catch (error) {
-    return handleError(error);
+    return handleError(error, res);
   }
 };
 
-const handleError = (error) => {
+const deleteReview = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const wasDeleted = await Review.destroy({
+      where: { id: id },
+      returning: true,
+    });
+
+    if (wasDeleted)
+      return res.status(200).send("Review successfully destroyed.");
+    else return res.status(404).send("Review not found.");
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
+const handleError = (error, res) => {
   console.log(error);
   return res.status(500).json({ error: error.message });
 };
@@ -71,4 +87,5 @@ module.exports = {
   getReviewById,
   createReview,
   updateReview,
+  deleteReview,
 };
