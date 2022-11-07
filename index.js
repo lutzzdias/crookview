@@ -1,6 +1,7 @@
 const express = require('express')
 
 const review_controller = require('./controllers/review_controller')
+const item_controller = require("./controllers/item_controller")
 
 const app = express()
 const PORT = 3060
@@ -12,5 +13,6 @@ app.get('/api', (req, res) => {
 })
 
 app.use('/api/review', review_controller)
+app.use("/api/item", item_controller);
 
 app.listen(PORT, () => console.log(`api running on: http://localhost:${PORT}`))
