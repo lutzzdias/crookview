@@ -57,11 +57,27 @@ const updateReview = async (req, res) => {
     );
     res.status(200).json(result);
   } catch (error) {
-    handleError(error);
+    return handleError(error, res);
   }
 };
 
-const handleError = (error) => {
+const deleteReview = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const wasDeleted = await Review.destroy({
+      where: { id: id },
+      returning: true,
+    });
+
+    if (wasDeleted)
+      return res.status(200).send("Review successfully destroyed.");
+    else return res.status(404).send("Review not found.");
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
+const handleError = (error, res) => {
   console.log(error);
   return res.status(500).json({ error: error.message });
 };
@@ -72,4 +88,5 @@ module.exports = {
   getReviewById,
   createReview,
   updateReview,
+  deleteReview,
 };
