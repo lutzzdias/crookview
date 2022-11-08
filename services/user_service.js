@@ -1,8 +1,16 @@
 const { User } = require("../models/user");
+const bcrypt = require("bcryptjs");
 
 const createUser = async (req, res) =>{
     const { username, password, email, image } = req.body;
 
+    bcrypt.genSalt(10, (erro, salt) =>{
+        bcrypt.hash(password, salt, (erro, salt)=>{
+            if(erro){
+                return res.status(500).send("Error during user save");
+            }
+        })
+    })
     try{
         const emailExists = checkEmailExistence(email);
         if(emailExists == true) return res.status(400).send("Email is already register.");
@@ -13,7 +21,7 @@ const createUser = async (req, res) =>{
             email: email,
             image: image,
         });
-        res.status(200).send("user created with sucess");
+        res.status(200).send("User created with sucess");
     }catch (error){
         handleError(error);
     }
