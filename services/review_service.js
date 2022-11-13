@@ -67,8 +67,7 @@ const deleteReview = async (req, res) => {
       returning: true,
     });
 
-    if (wasDeleted)
-      return res.status(200).send("Review successfully destroyed.");
+    if (wasDeleted) return res.status(200).send("Review successfully deleted.");
     else return res.status(404).send("Review not found.");
   } catch (error) {
     return handleError(error, res);
