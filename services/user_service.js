@@ -13,7 +13,7 @@ const createUser = async (req, res) => {
   });
 
   try {
-    const emailExists = checkEmailExistence(email);
+    const emailExists = await checkEmailExistence(email);
 
     if (emailExists)
       return res.status(400).send("Email is already registered.");
@@ -32,8 +32,8 @@ const createUser = async (req, res) => {
 };
 
 const checkEmailExistence = async (email) => {
-  const user = await User.findOne(email);
-  if (user == null) return false;
+  const user = await User.findOne({ where: { email: email } });
+  if (!user) return false;
   else return true;
 };
 
