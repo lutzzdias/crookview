@@ -63,6 +63,22 @@ const updateItem = async (req, res) => {
   }
 };
 
+const deleteItem = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const wasDeleted = await Item.destroy({
+      where: { id: id },
+      returning: true,
+    });
+
+    if (wasDeleted) return res.status(200).send("Item successfully deleted.");
+    else return res.status(404).send("Item not found.");
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
 const handleError = (error, res) => {
   console.log(error);
   return res.status(500).json({ error: error.message });
@@ -73,4 +89,5 @@ module.exports = {
   getItemById,
   createItem,
   updateItem,
+  deleteItem,
 };
