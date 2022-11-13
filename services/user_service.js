@@ -1,14 +1,34 @@
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.findAll();
+    return res.status(200).json(users);
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
+const getUserById = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await User.findByPk(id);
+    if (user) return res.status(200).json(user);
+    else return res.status(404).send("User not found.");
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
 const createUser = async (req, res) => {
-  const { username, password, email, image } = req.body;
+  const { username, email, image } = req.body;
+  let { password } = req.body;
 
   bcrypt.genSalt(10, (error, salt) => {
-    bcrypt.hash(password, salt, (error, salt) => {
-      if (error) {
-        return handleError(error, res);
-      }
+    bcrypt.hash(password, salt, (error, hashedPassword) => {
+      if (error) return handleError(error, res);
+      password = hashedPassword;
     });
   });
 
@@ -43,5 +63,7 @@ const handleError = (error, res) => {
 };
 
 module.exports = {
+  getUsers,
+  getUserById,
   createUser,
 };
