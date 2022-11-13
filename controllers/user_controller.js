@@ -4,5 +4,4 @@ const router = Router();
 
 router.post("/", service.createUser);
 
-
 module.exports = router;
