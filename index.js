@@ -1,7 +1,7 @@
 const express = require("express");
 
-const review_controller = require('./controllers/review_controller')
-const item_controller = require("./controllers/item_controller")
+const review_controller = require("./controllers/review_controller");
+const item_controller = require("./controllers/item_controller");
 const user_controller = require("./controllers/user_controller");
 
 const app = express();
@@ -15,6 +15,6 @@ app.get("/api", (req, res) => {
 
 app.use("/api/review", review_controller);
 app.use("/api/item", item_controller);
-app.use("/api/create_user", user_controller);
+app.use("/api/user", user_controller);
 
-app.listen(PORT, () => console.log(`api running on: http://localhost:${PORT}`))
+app.listen(PORT, () => console.log(`api running on: http://localhost:${PORT}`));
