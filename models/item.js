@@ -1,6 +1,5 @@
 "use strict";
 const { Model } = require("sequelize");
-const { User, Review } = require("./");
 
 module.exports = (sequelize, DataTypes) => {
   class Item extends Model {
@@ -10,13 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Item.belongsTo(User, {
+      Item.belongsTo(models.User, {
         foreignKey: {
+          name: "user_id",
           type: DataTypes.UUID,
         },
       });
-      Item.hasMany(Review, {
+      Item.hasMany(models.Review, {
         foreignKey: {
+          name: "item_id",
           type: DataTypes.UUID,
         },
       });
