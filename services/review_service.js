@@ -3,9 +3,9 @@ const { Review } = require("../models/");
 const getReviews = async (req, res) => {
   try {
     const reviews = await Review.findAll();
-    res.status(200).json(reviews);
+    return res.status(200).json(reviews);
   } catch (error) {
-    handleError(error);
+    return handleError(error);
   }
 };
 
@@ -14,12 +14,10 @@ const getReviewById = async (req, res) => {
 
   try {
     const review = await Review.findByPk(id);
-
-    if (review == null) return res.status(404).send("Review not found.");
-
-    res.status(200).json(review);
+    if (review) return res.status(200).json(review);
+    else return res.status(404).send("Review not found.");
   } catch (error) {
-    handleError(error);
+    return handleError(error);
   }
 };
 
@@ -33,9 +31,9 @@ const createReview = async (req, res) => {
       like_count: likeCount,
       date: date,
     });
-    res.status(201).json(newReview);
+    return res.status(201).json(newReview);
   } catch (error) {
-    handleError(error);
+    return handleError(error);
   }
 };
 
@@ -55,7 +53,7 @@ const updateReview = async (req, res) => {
       },
       { where: { id: id }, returning: true }
     );
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (error) {
     return handleError(error, res);
   }
@@ -81,7 +79,6 @@ const handleError = (error, res) => {
   console.log(error);
   return res.status(500).json({ error: error.message });
 };
-
 
 module.exports = {
   getReviews,

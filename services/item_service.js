@@ -3,9 +3,9 @@ const { Item } = require("../models");
 const getItems = async (req, res) => {
   try {
     const items = await Item.findAll();
-    res.status(200).json(items);
+    return res.status(200).json(items);
   } catch (error) {
-    handleError(error, res);
+    return handleError(error, res);
   }
 };
 
@@ -15,10 +15,10 @@ const getItemById = async (req, res) => {
   try {
     const item = await Item.findByPk(id);
 
-    if (item) res.status(200).json(item);
-    else res.status(404).send("Item not found.");
+    if (item) return res.status(200).json(item);
+    else return res.status(404).send("Item not found.");
   } catch (error) {
-    handleError(error, res);
+    return handleError(error, res);
   }
 };
 
@@ -34,9 +34,9 @@ const createItem = async (req, res) => {
       type: type,
     });
 
-    res.status(201).json(newItem);
+    return res.status(201).json(newItem);
   } catch (error) {
-    handleError(error, res);
+    return handleError(error, res);
   }
 };
 
@@ -56,10 +56,10 @@ const updateItem = async (req, res) => {
       { where: { id: id }, returning: true }
     );
 
-    if (result) res.status(200).json(result);
-    else res.status(404).send("Item not found");
+    if (result) return res.status(200).json(result);
+    else return res.status(404).send("Item not found");
   } catch (error) {
-    handleError(error, res);
+    return handleError(error, res);
   }
 };
 

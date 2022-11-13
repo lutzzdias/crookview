@@ -7,13 +7,15 @@ const createUser = async (req, res) => {
   bcrypt.genSalt(10, (error, salt) => {
     bcrypt.hash(password, salt, (error, salt) => {
       if (error) {
-        handleError(error, res);
+        return handleError(error, res);
       }
     });
   });
+
   try {
     const emailExists = checkEmailExistence(email);
-    if (emailExists == true)
+
+    if (emailExists)
       return res.status(400).send("Email is already registered.");
 
     const newUser = await User.create({
@@ -23,9 +25,9 @@ const createUser = async (req, res) => {
       image: image,
     });
 
-    res.status(201).json(newUser);
+    return res.status(201).json(newUser);
   } catch (error) {
-    handleError(error, res);
+    return handleError(error, res);
   }
 };
 
