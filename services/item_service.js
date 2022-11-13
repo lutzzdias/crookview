@@ -2,8 +2,8 @@ const { Item } = require("../models");
 
 const getItems = async (req, res) => {
   try {
-    const item = await Item.findAll();
-    res.status(200).json(item);
+    const items = await Item.findAll();
+    res.status(200).json(items);
   } catch (error) {
     handleError(error, res);
   }
@@ -15,9 +15,8 @@ const getItemById = async (req, res) => {
   try {
     const item = await Item.findByPk(id);
 
-    if (item == null) return res.status(404).send("Item not found.");
-
-    res.status(200).json(item);
+    if (item) res.status(200).json(item);
+    else res.status(404).send("Item not found.");
   } catch (error) {
     handleError(error, res);
   }
@@ -25,6 +24,7 @@ const getItemById = async (req, res) => {
 
 const createItem = async (req, res) => {
   const { title, description, date, image, type } = req.body;
+
   try {
     const newItem = await Item.create({
       title: title,
@@ -33,6 +33,7 @@ const createItem = async (req, res) => {
       image: image,
       type: type,
     });
+
     res.status(201).json(newItem);
   } catch (error) {
     handleError(error, res);
@@ -54,7 +55,9 @@ const updateItem = async (req, res) => {
       },
       { where: { id: id }, returning: true }
     );
-    res.status(200).json(result);
+
+    if (result) res.status(200).json(result);
+    else res.status(404).send("Item not found");
   } catch (error) {
     handleError(error, res);
   }
@@ -64,6 +67,7 @@ const handleError = (error, res) => {
   console.log(error);
   return res.status(500).json({ error: error.message });
 };
+
 module.exports = {
   getItems,
   getItemById,
