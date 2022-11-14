@@ -81,15 +81,26 @@ const updateReview = async (req, res) => {
 };
 
 const deleteReview = async (req, res) => {
-  const id = req.params.id;
-  try {
-    const wasDeleted = await Review.destroy({
-      where: { id: id },
-      returning: true,
-    });
+  // Save info from the request into variables
+  const reviewId = req.params.id;
+  const { userId } = req.body;
 
-    if (wasDeleted) return res.status(200).send("Review successfully deleted.");
-    else return res.status(404).send("Review not found.");
+  try {
+    // Find review
+    const review = await Review.findByPk(reviewId);
+
+    // Validation
+    if (review == null) return res.status(404).send("Review not found.");
+    if (review.user_id != userId)
+      return res
+        .status(403)
+        .send("User cannot delete a review posted by another user.");
+
+    // Delete review
+    await review.destroy();
+
+    // Return success message
+    return res.status(200).send("Review successfully deleted.");
   } catch (error) {
     return handleError(error, res);
   }
