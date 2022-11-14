@@ -49,22 +49,32 @@ const createReview = async (req, res) => {
 };
 
 const updateReview = async (req, res) => {
-  const id = req.params.id;
-  const { title, body, stars, like_count, date } = req.body;
+  // Save info from the request into variables
+  const reviewId = req.params.id;
+  const { title, body, stars, like_count, date, userId } = req.body;
+
   try {
-    // the update method returns [numberOfRowsAffected, List<Object> Rows]
-    // The next line discards the number of rows affected and gets only the first row (it will always be one because we're updating by id)
-    const [_, [result]] = await Review.update(
-      {
-        title: title,
-        body: body,
-        stars: stars,
-        like_count: like_count,
-        date: date,
-      },
-      { where: { id: id }, returning: true }
-    );
-    return res.status(200).json(result);
+    // Find review
+    const review = await Review.findByPk(reviewId);
+
+    // Validation
+    if (review == null) return res.status(404).send("Review not found.");
+    if (review.user_id != userId)
+      return res
+        .status(403)
+        .send("User cannot update a review posted by another user.");
+
+    // Update
+    await review.update({
+      title: title,
+      body: body,
+      stars: stars,
+      like_count: like_count,
+      date: date,
+    });
+
+    // Return updated review in jSON
+    return res.status(200).json(review);
   } catch (error) {
     return handleError(error, res);
   }
