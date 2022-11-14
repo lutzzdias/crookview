@@ -22,8 +22,11 @@ const getReviewById = async (req, res) => {
 };
 
 const createReview = async (req, res) => {
+  // Save info from the request into variables
   const { title, body, stars, likeCount, date, userId, itemId } = req.body;
+
   try {
+    // Validation
     const otherReviewBySameUser = await Review.findAll({
       where: { user_id: userId, item_id: itemId },
     });
@@ -32,6 +35,7 @@ const createReview = async (req, res) => {
     if (otherReviewBySameUser.length)
       return res.status(400).send("User may only have 1 review per item.");
 
+    // Create review
     const newReview = await Review.create({
       title: title,
       body: body,
@@ -42,6 +46,7 @@ const createReview = async (req, res) => {
       item_id: itemId,
     });
 
+    // Return created Review in jSON
     return res.status(201).json(newReview);
   } catch (error) {
     return handleError(error, res);
@@ -49,37 +54,58 @@ const createReview = async (req, res) => {
 };
 
 const updateReview = async (req, res) => {
-  const id = req.params.id;
-  const { title, body, stars, like_count, date } = req.body;
+  // Save info from the request into variables
+  const reviewId = req.params.id;
+  const { title, body, stars, like_count, date, userId } = req.body;
+
   try {
-    // the update method returns [numberOfRowsAffected, List<Object> Rows]
-    // The next line discards the number of rows affected and gets only the first row (it will always be one because we're updating by id)
-    const [_, [result]] = await Review.update(
-      {
-        title: title,
-        body: body,
-        stars: stars,
-        like_count: like_count,
-        date: date,
-      },
-      { where: { id: id }, returning: true }
-    );
-    return res.status(200).json(result);
+    // Find review
+    const review = await Review.findByPk(reviewId);
+
+    // Validation
+    if (review == null) return res.status(404).send("Review not found.");
+    if (review.user_id != userId)
+      return res
+        .status(403)
+        .send("User cannot update a review posted by another user.");
+
+    // Update
+    await review.update({
+      title: title,
+      body: body,
+      stars: stars,
+      like_count: like_count,
+      date: date,
+    });
+
+    // Return updated review in jSON
+    return res.status(200).json(review);
   } catch (error) {
     return handleError(error, res);
   }
 };
 
 const deleteReview = async (req, res) => {
-  const id = req.params.id;
-  try {
-    const wasDeleted = await Review.destroy({
-      where: { id: id },
-      returning: true,
-    });
+  // Save info from the request into variables
+  const reviewId = req.params.id;
+  const { userId } = req.body;
 
-    if (wasDeleted) return res.status(200).send("Review successfully deleted.");
-    else return res.status(404).send("Review not found.");
+  try {
+    // Find review
+    const review = await Review.findByPk(reviewId);
+
+    // Validation
+    if (review == null) return res.status(404).send("Review not found.");
+    if (review.user_id != userId)
+      return res
+        .status(403)
+        .send("User cannot delete a review posted by another user.");
+
+    // Delete review
+    await review.destroy();
+
+    // Return success message
+    return res.status(200).send("Review successfully deleted.");
   } catch (error) {
     return handleError(error, res);
   }
