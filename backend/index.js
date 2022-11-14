@@ -1,4 +1,7 @@
 const express = require("express");
+const passport = require("passport");
+const session = require("express-session");
+require("./config/auth")(passport);
 
 const review_controller = require("./controllers/review_controller");
 const item_controller = require("./controllers/item_controller");
@@ -8,6 +11,14 @@ const app = express();
 const PORT = 3060;
 
 app.use(express.json());
+app.use(session({
+    secret: "crook",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 30*60*1000}
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get("/api", (req, res) => {
   res.send("Home page");
