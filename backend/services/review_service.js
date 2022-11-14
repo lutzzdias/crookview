@@ -22,15 +22,26 @@ const getReviewById = async (req, res) => {
 };
 
 const createReview = async (req, res) => {
-  const { title, body, stars, likeCount, date } = req.body;
+  const { title, body, stars, likeCount, date, userId, itemId } = req.body;
   try {
+    const otherReviewBySameUser = await Review.findAll({
+      where: { user_id: userId, item_id: itemId },
+    });
+    console.log(otherReviewBySameUser);
+
+    if (otherReviewBySameUser.length)
+      return res.status(400).send("User may only have 1 review per item.");
+
     const newReview = await Review.create({
       title: title,
       body: body,
       stars: stars,
       like_count: likeCount,
       date: date,
+      user_id: userId,
+      item_id: itemId,
     });
+
     return res.status(201).json(newReview);
   } catch (error) {
     return handleError(error, res);
