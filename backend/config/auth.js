@@ -9,7 +9,7 @@ module.exports = (passport) => {
     passport.use(new localstrategy({
         //aqui deveria ser a parte que estou pegando do front, deixei do mesmo jeito do tutorial. 
         //Preciso achar um jeito correto depois.
-        emailField: 'email',
+        usernameField: 'email',
         passwordField: 'password'
     }, async (email, password, done) =>{
         try{
@@ -17,14 +17,14 @@ module.exports = (passport) => {
             
             //user not find
             if(!user){
-                return done(null, false, res.status(403).send("Email Incorrect"));
+                return done(null, false, {message: "Incorrect Email"});
             }
 
             const valid = bcrypt.compareSync(password, user.password);
             if(!valid){
-                return done(null, false, res.status(403).send("Incorrect password"));
+                return done(null, false, {message: "Incorrect password"});
             }else{
-                return done(null, user, res.status(200).send("Welcome to CrookView"));
+                return done(null, user, {message: "Welcome to Crookview"});
             }
         }catch(error){
             done(error, false);

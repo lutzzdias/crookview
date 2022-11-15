@@ -1,6 +1,6 @@
 const express = require("express");
-const passport = require("passport");
 const session = require("express-session");
+const passport = require("passport");
 require("./config/auth")(passport);
 
 const review_controller = require("./controllers/review_controller");
