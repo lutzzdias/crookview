@@ -24,7 +24,7 @@ module.exports = (passport) => {
             if(!valid){
                 return done(null, false, res.status(403).send("Incorrect password"));
             }else{
-                return done(null, user);
+                return done(null, user, res.status(200).send("Welcome to CrookView"));
             }
         }catch(error){
             done(error, false);
