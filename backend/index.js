@@ -11,17 +11,22 @@ const app = express();
 const PORT = 3060;
 
 app.use(express.json());
-app.use(session({
+app.use(
+  session({
     secret: "crook",
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 30*60*1000}
-}))
+    cookie: { maxAge: 30 * 60 * 1000 },
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/api", (req, res) => {
-  res.send("Home page");
+// EJS config
+app.set("view engine", "ejs");
+
+app.get("/", (req, res) => {
+  res.render("../../frontend/views/home.ejs");
 });
 
 app.use("/api/review", review_controller);
