@@ -36,6 +36,17 @@ const getSeries = async (req, res) => {
   }
 };
 
+const getItemByName = async (req, res) => {
+  const { query } = req.body;
+
+  try {
+    const result = await Item.findAll({ where: { title: query } });
+    return res.status(200).json(result);
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
 const getItemById = async (req, res) => {
   const id = req.params.id;
 
@@ -135,6 +146,7 @@ module.exports = {
   getMovies,
   getBooks,
   getSeries,
+  getItemByName,
   getItemById,
   createItem,
   updateItem,
