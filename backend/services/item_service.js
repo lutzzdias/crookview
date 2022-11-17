@@ -9,6 +9,44 @@ const getItems = async (req, res) => {
   }
 };
 
+const getMovies = async (req, res) => {
+  try {
+    const movies = await Item.findAll({ where: { type: "movie" } });
+    return res.status(200).json(movies);
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
+const getBooks = async (req, res) => {
+  try {
+    const books = await Item.findAll({ where: { type: "book" } });
+    return res.status(200).json(books);
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
+const getSeries = async (req, res) => {
+  try {
+    const series = await Item.findAll({ where: { type: "series" } });
+    return res.status(200).json(series);
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
+const getItemByName = async (req, res) => {
+  const { query } = req.body;
+
+  try {
+    const result = await Item.findAll({ where: { title: query } });
+    return res.status(200).json(result);
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
 const getItemById = async (req, res) => {
   const id = req.params.id;
 
@@ -105,6 +143,10 @@ const handleError = (error, res) => {
 
 module.exports = {
   getItems,
+  getMovies,
+  getBooks,
+  getSeries,
+  getItemByName,
   getItemById,
   createItem,
   updateItem,

@@ -53,6 +53,24 @@ const createReview = async (req, res) => {
   }
 };
 
+const addLikeToReviewById = async (req, res) => {
+  const id = req.params.id;
+
+  // TODO: Validate only one like per user
+
+  try {
+    const review = await Review.findByPk(id);
+    let likeCount = review.like_count + 1;
+    await review.update({
+      like_count: likeCount,
+    });
+
+    return res.status(200).json(review);
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
 const updateReview = async (req, res) => {
   // Save info from the request into variables
   const reviewId = req.params.id;
@@ -120,6 +138,7 @@ module.exports = {
   getReviews,
   getReviewById,
   createReview,
+  addLikeToReviewById,
   updateReview,
   deleteReview,
 };
