@@ -3,7 +3,9 @@ const { Review } = require("../models");
 
 const getItems = async (req, res) => {
   try {
-    const items = await Item.findAll();
+    const items = await Item.findAll({
+      order: [["created_at", "DESC"]],
+    });
     return res.status(200).json(items);
   } catch (error) {
     return handleError(error, res);
