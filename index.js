@@ -12,7 +12,10 @@ const view_controller = require("./frontend/controllers/view_controller");
 const app = express();
 const PORT = 3060;
 
+// Use json to make and answer requests
 app.use(express.json());
+
+// Initialize session
 app.use(
   session({
     secret: "crook",
@@ -29,12 +32,13 @@ app.set("view engine", "ejs");
 app.set("views", "./frontend/views");
 app.use(express.static("./frontend/"));
 
-app.get("/", async (req, res) => {
-  view_controller.getHomeView(req, res);
-});
+// Screens controller
+app.use("/", view_controller);
 
+// Backend controllers
 app.use("/api/review", review_controller);
 app.use("/api/item", item_controller);
 app.use("/api/user", user_controller);
 
-app.listen(PORT, () => console.log(`api running on: http://localhost:${PORT}`));
+// Listen to changes
+app.listen(PORT, () => console.log(`app running on: http://localhost:${PORT}`));

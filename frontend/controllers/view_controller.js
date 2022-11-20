@@ -1,17 +1,28 @@
 const axios = require("axios");
+const { Router } = require("express");
+const router = Router();
+
+router.get("/", async (req, res) => await getHomeView(req, res));
+router.get("/movies", async (req, res) => await getMoviesView(req, res));
 
 const getHomeView = async (req, res) => {
-  info = await getInfo();
+  info = await getHomeInfo();
   res.render("home", info);
 };
 
-const getInfo = async () => {
-  const trendingInfo = await axios.get(
+const getMoviesView = async (req, res) => {
+  const response = await axios.get("http://localhost:3060/api/item/movies");
+  const movies = response.data;
+  res.render("movies", { movies: movies });
+};
+
+const getHomeInfo = async () => {
+  const trendingResponse = await axios.get(
     "http://localhost:3060/api/item/trending"
   );
-  const trendingItems = trendingInfo.data;
-  const latestInfo = await axios.get("http://localhost:3060/api/item/");
-  const latestItems = latestInfo.data.slice(0, 5);
+  const trendingItems = trendingResponse.data;
+  const latestResponse = await axios.get("http://localhost:3060/api/item/");
+  const latestItems = latestResponse.data.slice(0, 5);
 
   return {
     trending: trendingItems,
@@ -19,6 +30,4 @@ const getInfo = async () => {
   };
 };
 
-module.exports = {
-  getHomeView,
-};
+module.exports = router;
