@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const getView = async (req, res) => {
+const getHomeView = async (req, res) => {
   info = await getInfo();
   res.render("home", info);
 };
@@ -20,5 +20,5 @@ const getInfo = async () => {
 };
 
 module.exports = {
-  getView,
+  getHomeView,
 };
