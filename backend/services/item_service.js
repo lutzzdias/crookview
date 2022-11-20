@@ -37,6 +37,15 @@ const getSeries = async (req, res) => {
   }
 };
 
+const getTrending = async (req, res) => {
+  try {
+    const trending = await Item.findAll({ where: { trending: true } });
+    return res.status(200).json(trending);
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
 const getItemByName = async (req, res) => {
   const { query } = req.body;
 
@@ -52,7 +61,7 @@ const getItemById = async (req, res) => {
   const id = req.params.id;
 
   try {
-    const item = await Item.findByPk(id, {include: Review});
+    const item = await Item.findByPk(id, { include: Review });
 
     if (item) return res.status(200).json(item);
     else return res.status(404).send("Item not found.");
@@ -118,7 +127,7 @@ const deleteItem = async (req, res) => {
 
   try {
     // Find item
-    const item = await Item.findByPK(itemId);
+    const item = await Item.findByPk(itemId);
 
     // Validation
     if (!item) return res.status(404).send("Item not found.");
@@ -147,6 +156,7 @@ module.exports = {
   getMovies,
   getBooks,
   getSeries,
+  getTrending,
   getItemByName,
   getItemById,
   createItem,
