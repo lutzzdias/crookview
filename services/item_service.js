@@ -14,7 +14,10 @@ const getItems = async (req, res) => {
 
 const getMovies = async (req, res) => {
   try {
-    const movies = await Item.findAll({ where: { type: "movie" } });
+    const movies = await Item.findAll({
+      where: { type: "movie" },
+      order: [["created_at", "DESC"]],
+    });
     return res.status(200).json(movies);
   } catch (error) {
     return handleError(error, res);
