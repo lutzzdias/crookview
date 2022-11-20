@@ -1,4 +1,5 @@
 const { Item } = require("../models");
+const { Review } = require("../models");
 
 const getItems = async (req, res) => {
   try {
@@ -51,7 +52,7 @@ const getItemById = async (req, res) => {
   const id = req.params.id;
 
   try {
-    const item = await Item.findByPk(id);
+    const item = await Item.findByPk(id, {include: Review});
 
     if (item) return res.status(200).json(item);
     else return res.status(404).send("Item not found.");
