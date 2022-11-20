@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <title>login</title>
+</head>
+<body>
+  <%- include('navbar'); %>
+        <div class="login">      
+          
+          <div id="login">
+            <form method="post" action=""> 
+              <h1><center>Login</center></h1> <br>
+              <p> 
+                <label for="email_login">Email</label><br>
+                <input id="email_login" name="email_login" required="required" type="text" placeholder/>
+              </p>
+              <br>
+              <p> 
+                <label for="senha_login">Password</label><br>
+                <input id="senha_login" name="senha_login" required="required" type="password" placeholder/> 
+              </p>
+                    <br>
+              <p> 
+                <input type="submit" value="Login" /> 
+              </p>
+              <br>
+              <a href="register.html">register</a>
+            
+            </form>
+          </div>
+
+
+</body>
+</html>
