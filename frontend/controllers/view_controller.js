@@ -6,6 +6,7 @@ router.get("/", async (req, res) => await getHomeView(req, res));
 router.get("/movies", async (req, res) => await getMoviesView(req, res));
 router.get("/series", async (req, res) => await getSeriesView(req, res));
 router.get("/books", async (req, res) => await getBooksView(req, res));
+router.get("/:id", async (req, res) => await getItemView(req, res));
 
 const getHomeView = async (req, res) => {
   info = await getHomeInfo();
@@ -28,6 +29,18 @@ const getBooksView = async (req, res) => {
   const response = await axios.get("http://localhost:3060/api/item/books");
   const books = response.data;
   res.render("books", { books: books });
+};
+
+const getItemView = async (req, res) => {
+  const id = req.params.id;
+
+  const itemResponse = await axios.get(`http://localhost:3060/api/item/${id}`);
+  const item = itemResponse.data;
+
+  const itemsResponse = await axios.get("http://localhost:3060/api/item");
+  const items = itemsResponse.data;
+
+  res.render("item", { item: item, items: items });
 };
 
 const getHomeInfo = async () => {
