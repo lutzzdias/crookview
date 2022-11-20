@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/movies.css">
+
+    <title>Books</title>
+</head>
+
+<body>
+
+    <%- include('navbar'); %>
+
+        <section class="geral_section">
+
+            <h1>Books</h1>
+
+            <ul class="movies">
+                <% books.forEach(function(book){ %>
+                    <li class="card">
+
+                        <div>
+                            <a href="<%= %>">
+                                <%= book.title %>
+                            </a>
+                            <p>
+                                <%= book.description %>
+                            </p>
+                        </div>
+                    </li>
+
+                    <% }); %>
+            </ul>
+        </section>
+
+</body>
+
+</html>
