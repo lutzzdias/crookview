@@ -1,8 +1,8 @@
-const { Review } = require("../models/");
+const { Review, User } = require("../models/");
 
 const getReviews = async (req, res) => {
   try {
-    const reviews = await Review.findAll();
+    const reviews = await Review.findAll({ include: User });
     return res.status(200).json(reviews);
   } catch (error) {
     return handleError(error, res);
