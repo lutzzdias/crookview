@@ -39,18 +39,18 @@
             <h2>Trending</h2>
             <ul class="movie_flex_list">
                 <% trending.forEach(function(item){ %>
-                    <li class="card">
-
-                        <div>
-
-                            <a href="/<%= item.id %>">
-                                <%= item.title %>
-                            </a>
-                            <p>
-                                <%= item.description %>
-                            </p>
-                        </div>
-                    </li>
+                    <a href="/<%= item.id %>">
+                        <li class="card">
+                            <div>
+                                <p>
+                                    <%= item.title %>
+                                </p>
+                                <p>
+                                    <%= item.description %>
+                                </p>
+                            </div>
+                        </li>
+                    </a>
 
                     <% }); %>
             </ul>
