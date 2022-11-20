@@ -1,4 +1,6 @@
 const axios = require("axios");
+const { Router } = require("express");
+const router = Router();
 
 const getHomeView = async (req, res) => {
   info = await getInfo();
@@ -19,6 +21,6 @@ const getInfo = async () => {
   };
 };
 
-module.exports = {
-  getHomeView,
-};
+router.get("/", async (req, res) => getHomeView(req, res));
+
+module.exports = router;
