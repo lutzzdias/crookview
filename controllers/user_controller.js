@@ -13,7 +13,8 @@ router.post("/login",
     passport.authenticate('local', 
     {failureRedirect: 'login'}),
     (req, res) =>{
-        res.redirect('/');
+        res.send(req.user.id);
+//        res.redirect('/');
     }
 );
 
