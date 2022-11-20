@@ -1,14 +1,22 @@
 const axios = require("axios");
 
 const getView = async (req, res) => {
-  trendingMovies = await getTrending();
-  console.log(trendingMovies);
-  res.render("home", trendingMovies);
+  info = await getInfo();
+  res.render("home", info);
 };
 
-const getTrending = async () => {
-  const { data } = await axios.get("http://localhost:3060/api/item/trending");
-  return data;
+const getInfo = async () => {
+  const trendingInfo = await axios.get(
+    "http://localhost:3060/api/item/trending"
+  );
+  const trendingItems = trendingInfo.data;
+  const latestInfo = await axios.get("http://localhost:3060/api/item/");
+  const latestItems = latestInfo.data.slice(0, 5);
+
+  return {
+    trending: trendingItems,
+    latest: latestItems,
+  };
 };
 
 module.exports = {

@@ -38,15 +38,15 @@
 
             <h2>Trending</h2>
             <ul class="movie_flex_list">
-                <% trendingMovies.forEach(function(movie){ %>
+                <% trending.forEach(function(item){ %>
                     <li class="card">
 
                         <div>
                             <a href="<%= %>">
-                                <%= movie.title %>
+                                <%= item.title %>
                             </a>
                             <p>
-                                <%= movie.description %>
+                                <%= item.description %>
                             </p>
                         </div>
                     </li>
@@ -55,25 +55,23 @@
             </ul>
 
 
-            <% /* %>
-                <h2>Lastest</h2>
-                <ul class="movie_flex_list">
-                    <% movies.forEach(function(movie){ %>
-                        <li class="card">
+            <h2>Lastest</h2>
+            <ul class="movie_flex_list">
+                <% info.latest.forEach(function(item){ %>
+                    <li class="card">
 
-                            <div>
-                                <a href="<%= %>">
-                                    <%= movie.title %>
-                                </a>
-                                <p>
-                                    <%= movie.desc %>
-                                </p>
-                            </div>
-                        </li>
+                        <div>
+                            <a href="<%= %>">
+                                <%= item.title %>
+                            </a>
+                            <p>
+                                <%= item.desc %>
+                            </p>
+                        </div>
+                    </li>
 
-                        <% }); %>
-                </ul>
-                <% */ %>
+                    <% }); %>
+            </ul>
         </section>
 </body>
 
