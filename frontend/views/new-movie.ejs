@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/new-movie.css">
+  <link rel="stylesheet" href="css/style.css">
+
+
+  <title>login</title>
+</head>
+
+<body>
+  <%- include('navbar'); %>
+    <div class="new-movie">
+
+      <div id="new">
+        <form method="post" action="">
+
+          <p>
+            <label for="add_image">Add Image</label><br>
+            <input id="add_image" name="add_image" required="required" type="file" placeholder="Add Image" />
+          </p>
+
+          <p>
+            <label for="title">Title</label><br>
+            <input id="title" name="title" required="required" type="text" placeholder />
+          </p>
+          <br>
+          <p>
+            <label for="description">Description</label><br>
+            <input id="description" name="description" required="required" type="text" textarea />
+          </p>
+          <br>
+          <p>
+            <input type="submit" value="Create" />
+          </p>
+          <br>
+
+
+        </form>
+      </div>
+
+
+
+</body>
+
+</html>
