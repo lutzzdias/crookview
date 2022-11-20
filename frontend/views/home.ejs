@@ -42,8 +42,8 @@
                     <li class="card">
 
                         <div>
-                            <img src="data:image/jpg;base64, <%= item.image %>>">
-                            <a href="/<%= {item.id} %>">
+
+                            <a href="/<%= item.id %>">
                                 <%= item.title %>
                             </a>
                             <p>
@@ -58,7 +58,7 @@
 
             <h2>Lastest</h2>
             <ul class="movie_flex_list">
-                <img src="data:image/jpg;base64, <%= item.image %>>">
+
                 <% info.latest.forEach(function(item){ %>
                     <li class="card">
 
