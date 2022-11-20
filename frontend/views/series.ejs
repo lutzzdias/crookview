@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/movies.css">
 
-    <title>Movies</title>
+    <title>Series</title>
 </head>
 
 <body>
@@ -17,18 +17,18 @@
 
         <section class="geral_section">
 
-            <h1>Movies</h1>
+            <h1>Series</h1>
 
             <ul class="movies">
-                <% movies.forEach(function(movie){ %>
+                <% series.forEach(function(serie){ %>
                     <li class="card">
 
                         <div>
                             <a href="<%= %>">
-                                <%= movie.title %>
+                                <%= serie.title %>
                             </a>
                             <p>
-                                <%= movie.description %>
+                                <%= serie.description %>
                             </p>
                         </div>
                     </li>

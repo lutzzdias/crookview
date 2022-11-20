@@ -1,5 +1,4 @@
-const { Item } = require("../models");
-const { Review } = require("../models");
+const { Item, Review, User } = require("../models");
 
 const getItems = async (req, res) => {
   try {
@@ -14,7 +13,10 @@ const getItems = async (req, res) => {
 
 const getMovies = async (req, res) => {
   try {
-    const movies = await Item.findAll({ where: { type: "movie" } });
+    const movies = await Item.findAll({
+      where: { type: "movie" },
+      order: [["created_at", "DESC"]],
+    });
     return res.status(200).json(movies);
   } catch (error) {
     return handleError(error, res);
@@ -63,7 +65,9 @@ const getItemById = async (req, res) => {
   const id = req.params.id;
 
   try {
-    const item = await Item.findByPk(id, { include: Review });
+    const item = await Item.findByPk(id, {
+      include: [{ model: Review, include: [User] }],
+    });
 
     if (item) return res.status(200).json(item);
     else return res.status(404).send("Item not found.");
