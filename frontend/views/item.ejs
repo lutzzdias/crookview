@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="/css/item.css">
     <link rel="stylesheet" href="/css/style.css">
 
-    <title>movie name</title>
+    <title>
+        <%= item.title %>
+    </title>
 </head>
 
 <body>
@@ -18,11 +20,15 @@
         <section class="movie geral_section">
             <img src="assets\item-image.png" alt="">
             <article>
-                <h2>movie name</h2>
-                <span>date</span>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus aut ut, non excepturi eum suscipit
-                    sint facilis fugiat, magnam fuga animi quisquam atque perspiciatis laborum illo illum culpa debitis
-                    tenetur!</p>
+                <h2>
+                    <%= item.title %>
+                </h2>
+                <span>
+                    <%= item.date %>
+                </span>
+                <p>
+                    <%= item.description %>
+                </p>
             </article>
         </section>
 
@@ -30,7 +36,7 @@
             <h3>Popular reviews:</h3>
             <hr>
             <ul>
-                <% reviews.forEach(function(review){ %>
+                <% item.Reviews.forEach(function(review){ %>
                     <li>
                         <div class="unique_review">
                             <img src="" alt="">
@@ -38,7 +44,7 @@
                             <article>
                                 <div class="username">
                                     <h3>
-                                        <%= review.username %>
+                                        <%= review.User.username %>
                                     </h3>
 
                                     <ul class="stars">
@@ -50,7 +56,7 @@
                                 </div>
 
                                 <p contenteditable="false">
-                                    <%= review.review %>
+                                    <%= review.body %>
                                 </p>
                             </article>
                             <div class="edit_del_btns">
@@ -74,7 +80,7 @@
 
         <section class="add_review_area geral_section">
             <h3>Add a review</h3>
-            <form method="post" action="/add_comment">
+            <form method="post" action="/api/review">
                 <textarea name="new_review" id="">aaa</textarea>
                 <div>
                     <ul class="stars">
@@ -92,18 +98,18 @@
         </section>
 
         <section class="similar_movies geral_section">
-            <h3>Similar Movies</h3>
+            <h3>Other Items</h3>
             <hr>
             <ul class="movie_flex_list">
-                <% movies.forEach(function(movie){ %>
+                <% items.forEach(function(item){ %>
                     <li class="card">
 
                         <div>
                             <h3>
-                                <%= movie.title %>
+                                <%= item.title %>
                             </h3>
                             <p>
-                                <%= movie.desc %>
+                                <%= item.description %>
                             </p>
                         </div>
                     </li>
