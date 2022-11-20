@@ -23,11 +23,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // EJS config
-app.use(express.static("../frontend/public"));
 app.set("view engine", "ejs");
+app.use(express.static("../frontend/public/"));
+
 
 app.get("/", (req, res) => {
-  res.render("../../frontend/views/home.ejs");
+  res.render("../../frontend/public/views/home.ejs");
 });
 
 app.use("/api/review", review_controller);
