@@ -11,6 +11,10 @@ router.get("/:id", async (req, res) => await getItemView(req, res));
 router.post("/user/login", async (req, res) => await login(req, res));
 
 router.post("/review", async (req, res) => await createReview(req, res));
+router.post(
+  "/delete-review/:id",
+  async (req, res) => await deleteReview(req, res)
+);
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -70,6 +74,17 @@ const createReview = async (req, res) => {
   });
 
   req.params.id = item_id;
+  getItemView(req, res);
+};
+
+const deleteReview = async (req, res) => {
+  const id = req.params.id;
+  const { itemId } = req.body;
+  const response = await axios.delete(
+    `http://localhost:3060/api/review/${id}`,
+    { userId: "c8d248c0-eb49-4c2f-8193-b636b3ecb58d" }
+  );
+  req.params.id = itemId;
   getItemView(req, res);
 };
 

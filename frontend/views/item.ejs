@@ -61,7 +61,12 @@
                             </article>
                             <div class="edit_del_btns">
                                 <button onclick="">&#9998;</button>
-                                <button onclick="">&#9746;</button>
+                                <form id="delete-review-form" method="POST" action="/delete-review/<%= review.id %>">
+                                    <button id="delete-review-icon" form="delete-review-form"
+                                        type="submit">&#9746;</button>
+                                    <input id="item-id-delete-review" name="itemId" type="hidden"
+                                        value="<%= item.id %>">
+                                </form>
                             </div>
 
                         </div>
@@ -78,13 +83,13 @@
             </ul>
         </section>
 
-        <section class="add_review_area geral_section">
+        <section class=" add_review_area geral_section">
             <h3>Add a review</h3>
             <form id="review_form" method="POST" action="/review">
                 <input id="title" name="title" type="text" value="titulo" />
                 <input id="body" name="body" type="text" value="body"></textarea>
                 <input id="stars" name="stars" type="number" value="2">
-                <input id="id" name="item_id" type="hidden" value="<%= item.id %>">
+                <input id="item-id-create-review" name="item_id" type="hidden" value="<%= item.id %>">
                 <button form="review_form" class="add_button" type="submit">ADD</button>
             </form>
         </section>
