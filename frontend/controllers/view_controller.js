@@ -7,6 +7,7 @@ router.get("/movies", async (req, res) => await getMoviesView(req, res));
 router.get("/series", async (req, res) => await getSeriesView(req, res));
 router.get("/books", async (req, res) => await getBooksView(req, res));
 router.get("/:id", async (req, res) => await getItemView(req, res));
+router.post("/review", async (req, res) => await createReview(req, res));
 
 const getHomeView = async (req, res) => {
   info = await getHomeInfo();
@@ -41,6 +42,10 @@ const getItemView = async (req, res) => {
   const items = itemsResponse.data;
 
   res.render("item", { item: item, items: items });
+};
+
+const createReview = async (req, res) => {
+  console.log(req.body);
 };
 
 const getHomeInfo = async () => {
