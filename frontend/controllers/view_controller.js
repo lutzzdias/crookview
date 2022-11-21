@@ -9,12 +9,14 @@ router.get("/series", async (req, res) => await getSeriesView(req, res));
 router.get("/books", async (req, res) => await getBooksView(req, res));
 router.get("/:id", async (req, res) => await getItemView(req, res));
 router.post("/user/login", async (req, res) => await login(req, res));
-
+router.get("/login", async (req, res) => await getLoginView(req, res));
 router.post("/review", async (req, res) => await createReview(req, res));
 router.post(
   "/delete-review/:id",
   async (req, res) => await deleteReview(req, res)
 );
+
+const getLoginView = async (req, res) => res.render("login");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -25,9 +27,10 @@ const login = async (req, res) => {
   loggedUserId = response.data;
   getHomeView(req, res);
 };
+
 const getHomeView = async (req, res) => {
-  info = await getHomeInfo();
-  res.render("home", info);
+  const info = await getHomeInfo();
+  res.render("home", { info: info });
 };
 
 const getMoviesView = async (req, res) => {
@@ -93,7 +96,7 @@ const getHomeInfo = async () => {
     "http://localhost:3060/api/item/trending"
   );
   const trendingItems = trendingResponse.data;
-  const latestResponse = await axios.get("http://localhost:3060/api/item/");
+  const latestResponse = await axios.get("http://localhost:3060/api/item");
   const latestItems = latestResponse.data.slice(0, 5);
 
   return {
