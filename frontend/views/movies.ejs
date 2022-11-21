@@ -22,7 +22,7 @@
             <ul class="movies">
                 <% movies.forEach(function(movie){ %>
                     <li class="card">
-
+                        <img src="data:image/png;base64,<%- movie.image  %>" alt="">
                         <div>
                             <a href="<%= %>">
                                 <%= movie.title %>
