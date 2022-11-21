@@ -21,18 +21,18 @@
 
             <ul class="movies">
                 <% series.forEach(function(serie){ %>
-                    <li class="card">
-                        <img src="data:image/png;base64,<%- serie.image  %>" alt="">
+                    <a href="<%= serie.id %>">
+                        <li class="card">
+                            <img src="data:image/png;base64,<%- serie.image  %>" alt="">
 
-                        <div>
-                            <a href="<%= %>">
+                            <div>
                                 <%= serie.title %>
-                            </a>
-                            <p>
-                                <%= serie.description %>
-                            </p>
-                        </div>
-                    </li>
+                                    <p>
+                                        <%= serie.description %>
+                                    </p>
+                            </div>
+                        </li>
+                    </a>
 
                     <% }); %>
             </ul>

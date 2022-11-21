@@ -21,17 +21,17 @@
 
             <ul class="movies">
                 <% books.forEach(function(book){ %>
-                    <li class="card">
-                        <img src="data:image/png;base64,<%- item.image  %>" alt="">
-                        <div>
-                            <a href="<%= %>">
+                    <a href="<%= book.id %>">
+                        <li class="card">
+                            <img src="data:image/png;base64,<%- item.image  %>" alt="">
+                            <div>
                                 <%= book.title %>
-                            </a>
-                            <p>
-                                <%= book.description %>
-                            </p>
-                        </div>
-                    </li>
+                                    <p>
+                                        <%= book.description %>
+                                    </p>
+                            </div>
+                        </li>
+                    </a>
 
                     <% }); %>
             </ul>
