@@ -15,6 +15,9 @@ const PORT = 3060;
 // Use json to make and answer requests
 app.use(express.json());
 
+// for parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
 // Initialize session
 app.use(
   session({
