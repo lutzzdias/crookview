@@ -14,7 +14,6 @@ router.post("/login",
     {failureRedirect: 'login'}),
     (req, res) =>{
         res.send(req.user.id);
-//        res.redirect('/');
     }
 );
 

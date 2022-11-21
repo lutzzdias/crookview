@@ -1,14 +1,27 @@
 const axios = require("axios");
 const { Router } = require("express");
 const router = Router();
+const passport = require("passport");
 
+var loggedUserId;
 router.get("/", async (req, res) => await getHomeView(req, res));
 router.get("/movies", async (req, res) => await getMoviesView(req, res));
 router.get("/series", async (req, res) => await getSeriesView(req, res));
 router.get("/books", async (req, res) => await getBooksView(req, res));
 router.get("/:id", async (req, res) => await getItemView(req, res));
+router.post("/user/login", async (req, res) => await login(req, res));
+
 router.post("/review", async (req, res) => await createReview(req, res));
 
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  const response = await axios.post("http://localhost:3060/api/user/login", {
+    email: email,
+    password: password,
+  });
+  loggedUserId = response.data;
+  getHomeView(req, res);
+};
 const getHomeView = async (req, res) => {
   info = await getHomeInfo();
   res.render("home", info);
