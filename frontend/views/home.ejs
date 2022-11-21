@@ -60,17 +60,17 @@
             <ul class="movie_flex_list">
 
                 <% info.latest.forEach(function(item){ %>
-                    <li class="card">
-                        <img src="data:image/png;base64,<%- item.image  %>" alt="">
-                        <div>
-                            <a href="<%= %>">
+                    <a href="<%= item.id %>">
+                        <li class="card">
+                            <img src="data:image/png;base64,<%- item.image  %>" alt="">
+                            <div>
                                 <%= item.title %>
-                            </a>
-                            <p>
-                                <%= item.desc %>
-                            </p>
-                        </div>
-                    </li>
+                                    <p>
+                                        <%= item.desc %>
+                                    </p>
+                            </div>
+                        </li>
+                    </a>
 
                     <% }); %>
             </ul>
