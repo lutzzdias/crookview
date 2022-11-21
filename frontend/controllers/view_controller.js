@@ -1,7 +1,6 @@
 const axios = require("axios");
 const { Router } = require("express");
 const router = Router();
-const passport = require("passport");
 
 var loggedUserId;
 router.get("/", async (req, res) => await getHomeView(req, res));
