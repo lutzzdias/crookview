@@ -57,7 +57,20 @@ const getItemView = async (req, res) => {
 };
 
 const createReview = async (req, res) => {
-  console.log(req.body);
+  const { title, body, stars, item_id } = req.body;
+  const userId = "cb8739ed-90af-49e8-a1ea-15878c7760ae";
+  const response = await axios.post("http://localhost:3060/api/review", {
+    title: title,
+    body: body,
+    stars: stars,
+    likeCount: 0,
+    date: Date.now(),
+    userId: userId,
+    itemId: item_id,
+  });
+
+  req.params.id = item_id;
+  getItemView(req, res);
 };
 
 const getHomeInfo = async () => {
