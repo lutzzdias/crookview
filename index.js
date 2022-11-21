@@ -37,6 +37,7 @@ app.use(express.static("./frontend/"));
 
 // Screens controller
 app.use("/", view_controller);
+app.get("/api/item/favicon.ico", (req, res) => res.status(204));
 
 // Backend controllers
 app.use("/api/review", review_controller);
