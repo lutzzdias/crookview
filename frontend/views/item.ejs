@@ -80,20 +80,11 @@
 
         <section class="add_review_area geral_section">
             <h3>Add a review</h3>
-            <form method="post" action="/api/review">
-                <textarea name="new_review" id="">aaa</textarea>
-                <div>
-                    <ul class="stars">
-                        <li>&#11088;</li>
-                        <li>&#11088;</li>
-                        <li>&#11088;</li>
-                        <li>&#9733;</li>
-                        <li>&#9733;</li>
-                    </ul>
-
-                    <button name="new_review" class="add_button" type="submit">ADD</button>
-
-                </div>
+            <form id="review_form" method="POST" action="/review">
+                <input id="title" name="title" type="text" value="titulo" />
+                <input id="body" name="body" type="text" value="body"></textarea>
+                <input id="stars" name="stars" type="number" value="2">
+                <button form="review_form" class="add_button" type="submit">ADD</button>
             </form>
         </section>
 
