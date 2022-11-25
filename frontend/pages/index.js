@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import ItemList from '../components/ItemList';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
@@ -30,6 +31,7 @@ export default function Home() {
           iaculis. Nam luctus arcu felis, ut eleifend felis pulvinar a. Etiam at
           risus efficitur, efficitur ante eget, finibus odio.
         </p>
+        <ItemList />
       </main>
     </div>
   );
