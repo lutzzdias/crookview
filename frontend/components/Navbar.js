@@ -1,5 +1,6 @@
-import styles from '../../styles/Navbar.module.css';
+import styles from '../styles/Navbar.module.css';
 
+// TODO: Change navBar item color onClick
 export default function Navbar() {
   return (
     <div>
