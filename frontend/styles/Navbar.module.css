@@ -1,27 +1,14 @@
 /*---Google font---*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-/*---Bases---*/
-*
-{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-body
-{
-  font-family: 'Poppins', sans-serif;
-}
-ul
-{
-  list-style:none;
-}
-a
-{
-  text-decoration:none;
-}
+
 /*---Header---*/
 .header
 {
+  /* all */
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+
   height:100vh;
   width:100vw;
   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2Njg2MjIwNTY&ixlib=rb-4.0.3&q=80');
@@ -30,9 +17,13 @@ a
 /*---Navbar---*/
 .navbar
 {
+  /* all */
+  margin:0;
+  box-sizing:border-box;
+
   position:absolute;
   width:100%;
-  padding:50px;
+  padding:25px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -42,24 +33,27 @@ a
   font-size:2em;
   font-weight:bold;
 }
-.navbar .nav-links ul
+.navbar .navLinks ul
 {
   display:flex;
+  list-style:none;
 }
-.navbar .nav-links ul li
+.navbar .navLinks ul li
 {
   margin:0 25px;
 }
-.navbar .nav-links ul li.active a
+.navbar .navLinks ul li.active a
 {
   color:#ed3c57;
   font-weight:600;
+  text-decoration:none;
 }
 .navbar a 
 {
   color:white;
+  text-decoration:none;
 }
-.navbar .menu-hamburger
+.navbar .menuHamburger
 {
   display:none;
   color:white;
@@ -70,22 +64,29 @@ a
   cursor:pointer;
 }
 
-@media screen and (max-width:900px)
+/* @media screen and (max-width:900px)
 {
   .navbar
   {
+    margin:0;
+    box-sizing:border-box;
+
     padding:0;
   }
   .navbar .logo
   {
     display:none;
   }
-  .navbar .menu-hamburger
+  .navbar .menuHamburger
   {
     display:block;
   }
-  .nav-links
+  .navLinks
   {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
     top:0;
     left:-100%;
     position:absolute;
@@ -97,27 +98,32 @@ a
     width:100%;
     height:100vh;
     transition: left 0.5s ease;
-    
   }
-  .nav-links.mobile-menu
+  .navLinks.mobileMenu
   {
-  left:0;
-    
+    left:0;
   }
 
-  .nav-links ul
+  .navLinks ul
   {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  
     display:flex;
     flex-direction:column;
     align-items:center;
   }
-  .navbar .nav-links ul li
+  .navbar .navLinks ul li
   {
-  margin:25px 0;
-  font-size:1.2em;
+    padding:0;
+    box-sizing:border-box;
+
+    margin:25px 0;
+    font-size:1.2em;
   }
-  .menu-hamburger
+  .menuHamburger
   {
     display:block;
   }
-}
+} */

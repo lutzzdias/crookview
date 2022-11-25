@@ -1,13 +1,15 @@
+import styles from '../../styles/Navbar.module.css';
+
 export default function Navbar() {
   return (
     <div>
-      <nav class="navbar">
-        <a href="#" class="logo">
+      <nav className={styles.navbar}>
+        <a href="#" className="logo">
           Logo
         </a>
-        <div class="nav-links">
-          <ul class="nav-menu">
-            <li class="active">
+        <div className={styles.navLinks}>
+          <ul className={styles.navMenu}>
+            <li className={styles.active}>
               <a href="">Home</a>
             </li>
             <li>
@@ -24,7 +26,9 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
-        <i class="bx bx-grid-alt menu-hamburger"></i>
+        <i
+          className={`${styles.bx} ${styles.bxGridAlt} ${styles.menuHamburger}`}
+        ></i>
       </nav>
     </div>
   );
