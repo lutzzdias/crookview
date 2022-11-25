@@ -7,7 +7,11 @@ export default function ItemCard(props) {
   return (
     <Link href={`/item/${props.item.id}`} className={styles.item}>
       <div className={styles.containerImg}>
-        <Image src={itemImage} className={styles.itemImg} />
+        <Image
+          src={itemImage}
+          className={styles.itemImg}
+          alt={props.item.name}
+        />
       </div>
 
       <div className={styles.itemInfo}>
