@@ -1,5 +1,5 @@
 .main {
-    min-height: 100vh;
+    height: 100vh;
     padding: 4rem 0;
     flex: 1;
     display: flex;
@@ -16,6 +16,7 @@
 	background-color: #1B263B;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	padding-top: 8vh;
+	margin-top: 60px;
 	align-items: center;
 	display: flex;
 	flex-direction: column;

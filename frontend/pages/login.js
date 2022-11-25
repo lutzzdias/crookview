@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import styles from '../styles/Login.module.css';
 
-export default function Items() {
+export default function Login() {
   return (
     <div className={styles.container}>
       <Head>
