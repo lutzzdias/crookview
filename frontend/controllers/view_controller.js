@@ -7,7 +7,6 @@ router.get("/", async (req, res) => await getHomeView(req, res));
 router.get("/movies", async (req, res) => await getMoviesView(req, res));
 router.get("/series", async (req, res) => await getSeriesView(req, res));
 router.get("/books", async (req, res) => await getBooksView(req, res));
-router.get("/:id", async (req, res) => await getItemView(req, res));
 router.post("/user/login", async (req, res) => await login(req, res));
 router.get("/login", async (req, res) => await getLoginView(req, res));
 router.post("/review", async (req, res) => await createReview(req, res));
@@ -15,6 +14,8 @@ router.post(
   "/delete-review/:id",
   async (req, res) => await deleteReview(req, res)
 );
+router.get("/:id", async (req, res) => await getItemView(req, res));
+
 
 const getLoginView = async (req, res) => res.render("login");
 
@@ -51,18 +52,6 @@ const getBooksView = async (req, res) => {
   res.render("books", { books: books });
 };
 
-const getItemView = async (req, res) => {
-  const id = req.params.id;
-
-  const itemResponse = await axios.get(`http://localhost:3060/api/item/${id}`);
-  const item = itemResponse.data;
-
-  const itemsResponse = await axios.get("http://localhost:3060/api/item");
-  const items = itemsResponse.data;
-
-  res.render("item", { item: item, items: items });
-};
-
 const createReview = async (req, res) => {
   const { title, body, stars, item_id } = req.body;
   const userId = "cb8739ed-90af-49e8-a1ea-15878c7760ae";
@@ -80,16 +69,6 @@ const createReview = async (req, res) => {
   getItemView(req, res);
 };
 
-const deleteReview = async (req, res) => {
-  const id = req.params.id;
-  const { itemId } = req.body;
-  const response = await axios.delete(
-    `http://localhost:3060/api/review/${id}`,
-    { userId: "c8d248c0-eb49-4c2f-8193-b636b3ecb58d" }
-  );
-  req.params.id = itemId;
-  getItemView(req, res);
-};
 
 const getHomeInfo = async () => {
   const trendingResponse = await axios.get(
@@ -105,4 +84,26 @@ const getHomeInfo = async () => {
   };
 };
 
+const deleteReview = async (req, res) => {
+  const id = req.params.id;
+  const { itemId } = req.body;
+  const response = await axios.delete(
+    `http://localhost:3060/api/review/${id}`,
+    { userId: "c8d248c0-eb49-4c2f-8193-b636b3ecb58d" }
+  );
+  req.params.id = itemId;
+  getItemView(req, res);
+};
+
+const getItemView = async (req, res) => {
+  const id = req.params.id;
+
+  const itemResponse = await axios.get(`http://localhost:3060/api/item/${id}`);
+  const item = itemResponse.data;
+
+  const itemsResponse = await axios.get("http://localhost:3060/api/item");
+  const items = itemsResponse.data;
+
+  res.render("item", { item: item, items: items });
+};
 module.exports = router;

@@ -1,46 +1,40 @@
 const { Item, Review, User } = require("../models");
 
 const getItems = async (req, res) => {
+  const type = req.params.id;
+  console.log(type);
   try {
+    if(type == 'all'){
     const items = await Item.findAll({
       order: [["created_at", "DESC"]],
     });
     return res.status(200).json(items);
-  } catch (error) {
-    return handleError(error, res);
   }
-};
-
-const getMovies = async (req, res) => {
-  try {
-    const movies = await Item.findAll({
-      where: { type: "movie" },
-      order: [["created_at", "DESC"]],
+    else if(type == 'movies'){
+      const movies = await Item.findAll({
+        where: {type: "movie"},
+        order: [["created_at", "DESC"]]
+      });
+      return res.status(200).json(movies);
+    }
+    else if(type == 'books'){
+      const books = await Item.findAll({
+      where: {type: "book"},
+      order: [["created_at", "DESC"]]
     });
-    return res.status(200).json(movies);
+      return res.status(200).json(books);
+    }
+    else if(type == 'series'){
+      const series = await Item.findAll({
+        where: {type: "series"},
+        order: [["created_at", "DESC"]]
+      });
+      return res.status(200).json(series);
+    }
   } catch (error) {
     return handleError(error, res);
   }
 };
-
-const getBooks = async (req, res) => {
-  try {
-    const books = await Item.findAll({ where: { type: "book" } });
-    return res.status(200).json(books);
-  } catch (error) {
-    return handleError(error, res);
-  }
-};
-
-const getSeries = async (req, res) => {
-  try {
-    const series = await Item.findAll({ where: { type: "series" } });
-    return res.status(200).json(series);
-  } catch (error) {
-    return handleError(error, res);
-  }
-};
-
 const getTrending = async (req, res) => {
   try {
     const trending = await Item.findAll({ where: { trending: true } });
@@ -159,9 +153,9 @@ const handleError = (error, res) => {
 
 module.exports = {
   getItems,
-  getMovies,
-  getBooks,
-  getSeries,
+  //getMovies,
+  //getBooks,
+  //getSeries,
   getTrending,
   getItemByName,
   getItemById,
