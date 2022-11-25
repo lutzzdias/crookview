@@ -2,6 +2,7 @@
   width: 200px;
   background-color: #fafafa;
   border-radius: 15px;
+  margin-top: 15px;
 }
 
 .itemName {
@@ -33,6 +34,11 @@
   display: block;
   color: #2d2d2d;
   font-size: 15px;
+  max-width: 100ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
 }
 
 .itemInstallments {
