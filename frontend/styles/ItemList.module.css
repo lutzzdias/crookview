@@ -1,0 +1,14 @@
+.containerListagem {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    height: auto;
+}
+
+.sectionName {
+  align-self: flex-start;
+  padding-left: 4vw;
+  padding-top: 25px;
+}

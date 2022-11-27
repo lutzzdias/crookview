@@ -54,7 +54,7 @@ const getBooksView = async (req, res) => {
 
 const createReview = async (req, res) => {
   const { title, body, stars, item_id } = req.body;
-  const userId = "cb8739ed-90af-49e8-a1ea-15878c7760ae";
+  const userId = "c8d248c0-eb49-4c2f-8193-b636b3ecb58d";
   const response = await axios.post("http://localhost:3060/api/review", {
     title: title,
     body: body,

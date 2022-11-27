@@ -71,7 +71,7 @@ const getItemById = async (req, res) => {
 };
 
 const createItem = async (req, res) => {
-  const { title, description, date, image, type } = req.body;
+  const { title, description, date, image, type, userId } = req.body;
 
   try {
     const newItem = await Item.create({
@@ -80,6 +80,7 @@ const createItem = async (req, res) => {
       date: date,
       image: image,
       type: type,
+      user_id: userId,
     });
 
     return res.status(201).json(newItem);

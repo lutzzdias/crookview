@@ -88,7 +88,7 @@
             <form id="review_form" method="POST" action="/review">
                 <input id="title" name="title" type="text" value="titulo" />
                 <input id="body" name="body" type="text" value="body"></textarea>
-                <input id="stars" name="stars" type="number" value="2">
+                <input id="stars" name="stars" type="number" value="3">
                 <input id="item-id-create-review" name="item_id" type="hidden" value="<%= item.id %>">
                 <button form="review_form" class="add_button" type="submit">ADD</button>
             </form>
@@ -99,17 +99,19 @@
             <hr>
             <ul class="movie_flex_list">
                 <% items.forEach(function(item){ %>
-                    <li class="card">
-                        <img src="data:image/png;base64,<%- item.image  %>" alt="">
-                        <div>
-                            <h3>
-                                <%= item.title %>
-                            </h3>
-                            <p>
-                                <%= item.description %>
-                            </p>
-                        </div>
-                    </li>
+                    <a href="<%= item.id %>">
+                        <li class="card">
+                            <img src="data:image/png;base64,<%- item.image  %>" alt="">
+                            <div>
+                                <h3>
+                                    <%= item.title %>
+                                </h3>
+                                <p>
+                                    <%= item.description %>
+                                </p>
+                            </div>
+                        </li>
+                    </a>
 
                     <% }); %>
             </ul>
