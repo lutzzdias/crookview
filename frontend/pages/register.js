@@ -13,7 +13,7 @@ export default function Register() {
 
       <main className={styles.main}>
         <form className={styles.loginForm}>
-          <h1 className={styles.title}>Login</h1>
+          <h1 className={styles.title}>Register</h1>
           <input
             className={styles.username}
             type="text"
@@ -35,12 +35,14 @@ export default function Register() {
             placeholder="Password"
             required
           />
-
+          <a className={styles.register} href="login">
+            Login
+          </a>
           <input
             className={styles.submitButton}
             type="submit"
-            name="Login"
-            value="Login"
+            name="Register"
+            value="Register"
           />
         </form>
       </main>
