@@ -1,10 +1,29 @@
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import ItemList from '../components/ItemList';
+
 import styles from '../styles/Home.module.css';
 
-import items from '../constants';
-
 export default function Home() {
+  const [trendingItems, setTrendingItems] = useState([]);
+  const [latestItems, setLatestItems] = useState([]);
+
+  const getTrendingItems = async () => {
+    const response = await axios.get('http://localhost:3060/api/item/trending');
+    return response.data;
+  };
+  const getLatestItems = async () => {
+    const response = await axios.get('http://localhost:3060/api/item/latest');
+    return response.data;
+  };
+
+  useEffect(() => {
+    getTrendingItems().then((res) => setTrendingItems(res));
+    getLatestItems().then((res) => setLatestItems(res));
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -33,8 +52,8 @@ export default function Home() {
           iaculis. Nam luctus arcu felis, ut eleifend felis pulvinar a. Etiam at
           risus efficitur, efficitur ante eget, finibus odio.
         </p>
-        <ItemList sectionName="Trending" items={items} />
-        <ItemList sectionName="Latest" items={items} />
+        <ItemList sectionName="Trending" items={trendingItems} />
+        <ItemList sectionName="Latest" items={latestItems} />
       </main>
     </div>
   );
