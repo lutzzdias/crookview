@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       title: DataTypes.STRING,
       body: DataTypes.TEXT,
-      stars: DataTypes.INTEGER,
+      rating: DataTypes.INTEGER,
       like_count: DataTypes.INTEGER,
       date: DataTypes.DATE,
     },

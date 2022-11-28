@@ -28,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       title: DataTypes.STRING,
       description: DataTypes.TEXT,
-      date: DataTypes.DATEONLY,
       image: DataTypes.BLOB,
       type: DataTypes.STRING,
       trending: DataTypes.BOOLEAN,
