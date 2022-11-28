@@ -23,7 +23,7 @@ const getReviewById = async (req, res) => {
 
 const createReview = async (req, res) => {
   // Save info from the request into variables
-  const { title, body, stars, likeCount, date, userId, itemId } = req.body;
+  const { title, body, rating, likeCount, date, userId, itemId } = req.body;
 
   try {
     // Validation
@@ -39,7 +39,7 @@ const createReview = async (req, res) => {
     const newReview = await Review.create({
       title: title,
       body: body,
-      stars: stars,
+      rating: rating,
       like_count: likeCount,
       date: date,
       user_id: userId,
@@ -74,7 +74,7 @@ const addLikeToReviewById = async (req, res) => {
 const updateReview = async (req, res) => {
   // Save info from the request into variables
   const reviewId = req.params.id;
-  const { title, body, stars, like_count, date, userId } = req.body;
+  const { title, body, rating, like_count, date, userId } = req.body;
 
   try {
     // Find review
@@ -91,7 +91,7 @@ const updateReview = async (req, res) => {
     await review.update({
       title: title,
       body: body,
-      stars: stars,
+      rating: rating,
       like_count: like_count,
       date: date,
     });
