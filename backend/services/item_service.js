@@ -71,13 +71,12 @@ const getItemById = async (req, res) => {
 };
 
 const createItem = async (req, res) => {
-  const { title, description, date, image, type, userId } = req.body;
+  const { title, description, image, type, userId } = req.body;
 
   try {
     const newItem = await Item.create({
       title: title,
       description: description,
-      date: date,
       image: image,
       type: type,
       user_id: userId,
@@ -92,7 +91,7 @@ const createItem = async (req, res) => {
 const updateItem = async (req, res) => {
   // Save info from the request into variables
   const itemId = req.params.id;
-  const { title, description, date, image, type, userId } = req.body;
+  const { title, description, image, type, userId } = req.body;
 
   try {
     // Find Item
@@ -109,7 +108,6 @@ const updateItem = async (req, res) => {
     await item.update({
       title: title,
       description: description,
-      date: date,
       image: image,
       type: type,
     });
