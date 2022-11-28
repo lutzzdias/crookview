@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
           name: "item_id",
           type: DataTypes.UUID,
         },
+        as: "reviews"
       });
     }
   }
