@@ -1,8 +1,9 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import ItemList from '../components/ItemList';
 import styles from '../styles/Items.module.css';
 
-import items from '../constants';
+import { items } from '../constants';
 
 export default function Items(props) {
   const { type } = props;
@@ -19,7 +20,12 @@ export default function Items(props) {
       <main className={styles.main}>
         <div className={styles.row}>
           <h2 className={styles.title}>{casedType}</h2>
-          <button className={styles.addButton}>New {type.slice(0, -1)}</button>
+          <Link
+            href={{ pathname: 'add-item', query: { type: type } }}
+            className={styles.addButton}
+          >
+            New {type.slice(0, -1)}
+          </Link>
         </div>
         <ItemList className="" title="" items={items} />
       </main>
