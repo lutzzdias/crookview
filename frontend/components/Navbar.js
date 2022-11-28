@@ -7,30 +7,45 @@ export default function Navbar() {
     <div>
       <nav className={styles.navbar}>
         <a href="/" className="logo">
-          Logo
+          Crookview
         </a>
         <div className={styles.navLinks}>
           <ul className={styles.navMenu}>
-            <li className={styles.active}>
+            <li>
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href={{ pathname: 'items', query: { type: 'movies' } }}>
+              <Link
+                href={{
+                  pathname: 'http://localhost:3000/items',
+                  query: { type: 'movies' },
+                }}
+              >
                 Movies
               </Link>
             </li>
             <li>
-              <Link href={{ pathname: 'items', query: { type: 'series' } }}>
+              <Link
+                href={{
+                  pathname: 'http://localhost:3000/items',
+                  query: { type: 'series' },
+                }}
+              >
                 Series
               </Link>
             </li>
             <li>
-              <Link href={{ pathname: 'items', query: { type: 'books' } }}>
+              <Link
+                href={{
+                  pathname: 'http://localhost:3000/items',
+                  query: { type: 'books' },
+                }}
+              >
                 Books
               </Link>
             </li>
             <li>
-              <Link href="login">Login</Link>
+              <Link href="http://localhost:3000/login">Login</Link>
             </li>
           </ul>
         </div>
