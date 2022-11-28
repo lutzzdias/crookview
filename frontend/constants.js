@@ -1,70 +1,129 @@
-const items = [
+// TODO: Add userId
+export const items = [
   {
     id: 0,
     type: 'tipo',
-    name: 'nome01',
+    title: 'nome01',
     description: 'descrição',
+    trending: true,
   },
   {
     id: 1,
     type: 'tipo',
-    name: 'nome02',
+    title: 'nome02',
     description: 'descrição',
+    trending: true,
   },
   {
     id: 2,
     type: 'tipo',
-    name: 'nome03',
+    title: 'nome03',
     description: 'descrição',
+    trending: true,
   },
   {
     id: 3,
     type: 'tipo',
-    name: 'nome04',
+    title: 'nome04',
     description: 'descrição',
+    trending: true,
   },
   {
     id: 4,
     type: 'tipo',
-    name: 'nome05',
+    title: 'nome05',
     description: 'descrição',
+    trending: true,
   },
   {
     id: 5,
     type: 'tipo',
-    name: 'nome06',
+    title: 'nome06',
     description: 'descrição',
+    trending: false,
   },
   {
     id: 6,
     type: 'tipo',
-    name: 'nome07',
+    title: 'nome07',
     description: 'descrição',
+    trending: false,
   },
   {
     id: 7,
     type: 'tipo',
-    name: 'nome08',
+    title: 'nome08',
     description: 'descrição',
+    trending: false,
   },
   {
     id: 8,
     type: 'tipo',
-    name: 'nome09',
+    title: 'nome09',
     description: 'descrição',
+    trending: false,
   },
   {
     id: 9,
     type: 'tipo',
-    name: 'nome10',
+    title: 'nome10',
     description: 'descrição',
+    trending: false,
   },
   {
     id: 10,
     type: 'tipo',
-    name: 'nome11',
+    title: 'nome11',
     description: 'descrição',
+    trending: false,
   },
 ];
 
-export default items;
+// TODO: Add userId and itemId
+export const reviews = [
+  {
+    id: 0,
+    title: 'Titulo 0',
+    body: 'description',
+    rating: 5,
+    user: {
+      id: 0,
+      username: 'lutz',
+      password: 'senha',
+      email: 'lutz@gmail.com',
+    },
+  },
+  {
+    id: 1,
+    title: 'Titulo 1',
+    body: 'description',
+    rating: 5,
+    user: {
+      id: 0,
+      username: 'lutz',
+      password: 'senha',
+      email: 'lutz@gmail.com',
+    },
+  },
+  {
+    id: 2,
+    title: 'Titulo 2',
+    body: 'description',
+    rating: 5,
+    user: {
+      id: 0,
+      username: 'lutz',
+      password: 'senha',
+      email: 'lutz@gmail.com',
+    },
+  },
+];
+
+export const users = [
+  {
+    id: 0,
+    username: 'lutz',
+    password: 'senha',
+    email: 'lutz@gmail.com',
+  },
+];
