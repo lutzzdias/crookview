@@ -1,14 +1,28 @@
+import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import ItemList from '../components/ItemList';
 import styles from '../styles/Items.module.css';
 
-import { items } from '../constants';
-
 export default function Items(props) {
   const { type } = props;
-
   const casedType = type.charAt(0).toUpperCase() + type.slice(1);
+
+  const [items, setItems] = useState([]);
+
+  const getItems = async () => {
+    const response = await axios.get('http://localhost:3060/api/item', {
+      params: { type: type },
+    });
+    return response.data;
+  };
+
+  useEffect(() => {
+    getItems().then((res) => setItems(res));
+    console.log('teste');
+  }, [type]);
+
   return (
     <div className={styles.container}>
       <Head>
