@@ -1,34 +1,30 @@
-const { Item, Review, User } = require("../models");
+const { Item, Review, User } = require('../models');
 
 const getItems = async (req, res) => {
-  let type = req.params.type;
-  console.log(type);
+  let type = req.query.type;
   let items = null;
   try {
-    if(type == 'all'){
+    if (type == 'all') {
       items = await Item.findAll({
-      order: [["created_at", "DESC"]],
-    });
-    return res.status(200).json(items);
-  }
-    else if(type == 'movies'){
-      items = await Item.findAll({
-      where: {type: "movie"},
-      order: [["created_at", "DESC"]]
+        order: [['created_at', 'DESC']],
       });
       return res.status(200).json(items);
-    }
-    else if(type == 'books'){
+    } else if (type == 'movies') {
       items = await Item.findAll({
-      where: {type: "book"},
-      order: [["created_at", "DESC"]]
-    });
+        where: { type: 'movies' },
+        order: [['created_at', 'DESC']],
+      });
       return res.status(200).json(items);
-    }
-    else if(type == 'series'){
+    } else if (type == 'books') {
       items = await Item.findAll({
-        where: {type: "series"},
-        order: [["created_at", "DESC"]]
+        where: { type: 'books' },
+        order: [['created_at', 'DESC']],
+      });
+      return res.status(200).json(items);
+    } else if (type == 'series') {
+      items = await Item.findAll({
+        where: { type: 'series' },
+        order: [['created_at', 'DESC']],
       });
       return res.status(200).json(items);
     }
@@ -37,9 +33,24 @@ const getItems = async (req, res) => {
   }
 };
 
+const getLatest = async (req, res) => {
+  try {
+    const latest = await Item.findAll({
+      limit: 6,
+      order: [['created_at', 'DESC']],
+    });
+    return res.status(200).json(latest);
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
 const getTrending = async (req, res) => {
   try {
-    const trending = await Item.findAll({ where: { trending: true } });
+    const trending = await Item.findAll({
+      where: { trending: true },
+      limit: 6,
+    });
     return res.status(200).json(trending);
   } catch (error) {
     return handleError(error, res);
@@ -64,7 +75,7 @@ const getItemById = async (req, res) => {
       include: [{ model: Review, include: [User] }],
     });
     if (item) return res.status(200).json(item);
-    else return res.status(404).send("Item not found.");
+    else return res.status(404).send('Item not found.');
   } catch (error) {
     return handleError(error, res);
   }
@@ -98,11 +109,11 @@ const updateItem = async (req, res) => {
     const item = await Item.findByPk(itemId);
 
     // Validation
-    if (!item) return res.status(404).send("Item not found");
+    if (!item) return res.status(404).send('Item not found');
     if (item.user_id != userId)
       return res
         .status(403)
-        .send("User cannot update an item posted by another user.");
+        .send('User cannot update an item posted by another user.');
 
     // Update
     await item.update({
@@ -129,17 +140,17 @@ const deleteItem = async (req, res) => {
     const item = await Item.findByPk(itemId);
 
     // Validation
-    if (!item) return res.status(404).send("Item not found.");
+    if (!item) return res.status(404).send('Item not found.');
     if (item.user_id != userId)
       return res
         .status(403)
-        .send("User cannot delete an item posted by another user.");
+        .send('User cannot delete an item posted by another user.');
 
     // Delete item
     await item.destroy();
 
     // Return success message
-    return res.status(200).send("Item successfully deleted.");
+    return res.status(200).send('Item successfully deleted.');
   } catch (error) {
     return handleError(error, res);
   }
@@ -152,6 +163,7 @@ const handleError = (error, res) => {
 
 module.exports = {
   getItems,
+  getLatest,
   getTrending,
   getItemByName,
   getItemById,
