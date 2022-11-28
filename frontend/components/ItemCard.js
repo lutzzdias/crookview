@@ -16,7 +16,7 @@ export default function ItemCard(props) {
 
       <div className={styles.itemInfo}>
         <span className={styles.itemType}>{props.item.type}</span>
-        <span className={styles.itemName}>{props.item.name}</span>
+        <span className={styles.itemName}>{props.item.title}</span>
         <span className={styles.itemDescription}>{props.item.description}</span>
       </div>
     </Link>
