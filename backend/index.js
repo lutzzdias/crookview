@@ -7,7 +7,7 @@ const review_controller = require("./controllers/review_controller");
 const item_controller = require("./controllers/item_controller");
 const user_controller = require("./controllers/user_controller");
 
-const view_controller = require("./frontend/controllers/view_controller");
+//const view_controller = require("./frontend/controllers/view_controller");
 
 const app = express();
 const PORT = 3060;
@@ -31,13 +31,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // EJS config
-app.set("view engine", "ejs");
-app.set("views", "./frontend/views");
+//app.set("view engine", "ejs");
+//app.set("views", "./frontend/views");
 app.use(express.static("./frontend/"));
 
 // Screens controller
-app.use("/", view_controller);
-app.get("/api/item/favicon.ico", (req, res) => res.status(204));
+//app.use("/", view_controller);
+//app.get("/api/item/favicon.ico", (req, res) => res.status(204));
 
 // Backend controllers
 app.use("/api/review", review_controller);
