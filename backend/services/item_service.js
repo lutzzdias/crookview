@@ -1,40 +1,42 @@
 const { Item, Review, User } = require("../models");
 
 const getItems = async (req, res) => {
-  const type = req.params.id;
+  let type = req.params.type;
   console.log(type);
+  let items = null;
   try {
     if(type == 'all'){
-    const items = await Item.findAll({
+      items = await Item.findAll({
       order: [["created_at", "DESC"]],
     });
     return res.status(200).json(items);
   }
     else if(type == 'movies'){
-      const movies = await Item.findAll({
-        where: {type: "movie"},
-        order: [["created_at", "DESC"]]
+      items = await Item.findAll({
+      where: {type: "movie"},
+      order: [["created_at", "DESC"]]
       });
-      return res.status(200).json(movies);
+      return res.status(200).json(items);
     }
     else if(type == 'books'){
-      const books = await Item.findAll({
+      items = await Item.findAll({
       where: {type: "book"},
       order: [["created_at", "DESC"]]
     });
-      return res.status(200).json(books);
+      return res.status(200).json(items);
     }
     else if(type == 'series'){
-      const series = await Item.findAll({
+      items = await Item.findAll({
         where: {type: "series"},
         order: [["created_at", "DESC"]]
       });
-      return res.status(200).json(series);
+      return res.status(200).json(items);
     }
   } catch (error) {
     return handleError(error, res);
   }
 };
+
 const getTrending = async (req, res) => {
   try {
     const trending = await Item.findAll({ where: { trending: true } });
@@ -57,12 +59,10 @@ const getItemByName = async (req, res) => {
 
 const getItemById = async (req, res) => {
   const id = req.params.id;
-
   try {
     const item = await Item.findByPk(id, {
       include: [{ model: Review, include: [User] }],
     });
-
     if (item) return res.status(200).json(item);
     else return res.status(404).send("Item not found.");
   } catch (error) {
@@ -154,9 +154,6 @@ const handleError = (error, res) => {
 
 module.exports = {
   getItems,
-  //getMovies,
-  //getBooks,
-  //getSeries,
   getTrending,
   getItemByName,
   getItemById,
