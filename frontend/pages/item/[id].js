@@ -13,9 +13,7 @@ export default function Info(props) {
   const [item, setItem] = useState(props.item);
 
   const getItems = async () => {
-    const response = await axios.get('http://localhost:3060/api/item', {
-      params: { type: 'all' },
-    });
+    const response = await axios.get('http://localhost:3060/api/item/latest');
     return response.data;
   };
 
