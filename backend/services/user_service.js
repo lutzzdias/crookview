@@ -66,5 +66,4 @@ module.exports = {
   getUsers,
   getUserById,
   createUser,
-  userLogged,
 };
