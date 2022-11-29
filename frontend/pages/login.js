@@ -24,7 +24,7 @@ export default function Login() {
         data: userInfo,
       });
       if (result.status == 200) {
-        localStorage.setItem('user', result.data);
+        localStorage.id = result.data;
         Router.push('/');
       }
     })();

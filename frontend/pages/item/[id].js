@@ -44,8 +44,21 @@ export default function Info(props) {
         userId: localStorage.getItem('user'),
         ...formData,
       });
-      console.log(updatedItem.data);
       setItem(updatedItem.data);
+    })();
+  };
+
+  const handleDeleteReview = (userId, reviewId, reviewUserId) => {
+    (async () => {
+      const result = await axios.delete(
+        `http://localhost:3060/api/review/${reviewId}`,
+        { data: { userId: userId } }
+      );
+      setItem(
+        await axios
+          .get(`http://localhost:3060/api/item/${props.item.id}`)
+          .then((result) => result.data)
+      );
     })();
   };
 
@@ -76,7 +89,11 @@ export default function Info(props) {
           <h3>Reviews:</h3>
           <ul>
             {item.reviews.map((review) => (
-              <Review key={review.id} review={review} />
+              <Review
+                key={review.id}
+                review={review}
+                handleDelete={handleDeleteReview}
+              />
             ))}
           </ul>
         </div>
