@@ -1,4 +1,4 @@
-const { Review, User } = require("../models/");
+const { Review, User, Item } = require('../models/');
 
 const getReviews = async (req, res) => {
   try {
@@ -15,7 +15,7 @@ const getReviewById = async (req, res) => {
   try {
     const review = await Review.findByPk(id);
     if (review) return res.status(200).json(review);
-    else return res.status(404).send("Review not found.");
+    else return res.status(404).send('Review not found.');
   } catch (error) {
     return handleError(error, res);
   }
@@ -23,21 +23,11 @@ const getReviewById = async (req, res) => {
 
 const createReview = async (req, res) => {
   // Save info from the request into variables
-  const { title, body, rating, likeCount, itemId } = req.body;
+  const { title, body, rating, likeCount, userId, itemId } = req.body;
   const date = Date.now();
-  const userId = loggedUserId;
   try {
-    // Validation
-    const otherReviewBySameUser = await Review.findAll({
-      where: { user_id: userId, item_id: itemId },
-    });
-    console.log(otherReviewBySameUser);
-
-    if (otherReviewBySameUser.length)
-      return res.status(400).send("User may only have 1 review per item.");
-
     // Create review
-    const newReview = await Review.create({
+    await Review.create({
       title: title,
       body: body,
       rating: rating,
@@ -47,8 +37,15 @@ const createReview = async (req, res) => {
       item_id: itemId,
     });
 
-    // Return created Review in jSON
-    return res.status(201).json(newReview);
+    const item = await Item.findByPk(itemId, {
+      include: {
+        model: Review,
+        as: 'reviews',
+        include: [{ model: User, as: 'user' }],
+      },
+    });
+    // Return updated Item in jSON
+    return res.status(201).json(item);
   } catch (error) {
     return handleError(error, res);
   }
@@ -82,11 +79,11 @@ const updateReview = async (req, res) => {
     const review = await Review.findByPk(reviewId);
 
     // Validation
-    if (review == null) return res.status(404).send("Review not found.");
+    if (review == null) return res.status(404).send('Review not found.');
     if (review.user_id != userId)
       return res
         .status(403)
-        .send("User cannot update a review posted by another user.");
+        .send('User cannot update a review posted by another user.');
 
     // Update
     await review.update({
@@ -114,17 +111,17 @@ const deleteReview = async (req, res) => {
     const review = await Review.findByPk(reviewId);
 
     // Validation
-    if (review == null) return res.status(404).send("Review not found.");
+    if (review == null) return res.status(404).send('Review not found.');
     if (review.user_id != userId)
       return res
         .status(403)
-        .send("User cannot delete a review posted by another user.");
+        .send('User cannot delete a review posted by another user.');
 
     // Delete review
     await review.destroy();
 
     // Return success message
-    return res.status(200).send("Review successfully deleted.");
+    return res.status(200).send('Review successfully deleted.');
   } catch (error) {
     return handleError(error, res);
   }

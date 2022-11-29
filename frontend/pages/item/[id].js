@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 
 export default function Info(props) {
   const [items, setItems] = useState([]);
+  const [formData, setFormData] = useState({ title: '', body: '', rating: 5 });
+  const [item, setItem] = useState(props.item);
 
   const getItems = async () => {
     const response = await axios.get('http://localhost:3060/api/item', {
@@ -20,6 +22,32 @@ export default function Info(props) {
   useEffect(() => {
     getItems().then((res) => setItems(res));
   }, []);
+
+  // TODO: Fix setFormData
+  const handleChange = (event) => {
+    const target = event.target.name;
+    setFormData((prevData) => {
+      return {
+        ...prevData,
+        [target]: event.target.value.trim(),
+      };
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    (async () => {
+      const updatedItem = await axios.post('http://localhost:3060/api/review', {
+        likeCount: 0,
+        itemId: props.item.id,
+        userId: localStorage.getItem('user'),
+        ...formData,
+      });
+      console.log(updatedItem.data);
+      setItem(updatedItem.data);
+    })();
+  };
 
   return (
     <div className={styles.container}>
@@ -34,12 +62,12 @@ export default function Info(props) {
           <div className={styles.row}>
             <Image
               src={itemImage}
-              alt={props.item.title}
+              alt={item.title}
               className={styles.itemImg}
             />
             <div className={styles.column}>
-              <h2>{props.item.title}</h2>
-              <p>{props.item.description}</p>
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
             </div>
           </div>
         </div>
@@ -47,7 +75,7 @@ export default function Info(props) {
         <div className={styles.reviews}>
           <h3>Reviews:</h3>
           <ul>
-            {props.item.reviews.map((review) => (
+            {item.reviews.map((review) => (
               <Review key={review.id} review={review} />
             ))}
           </ul>
@@ -55,24 +83,40 @@ export default function Info(props) {
 
         <section className={styles.addReviewArea}>
           <h3>Add a review</h3>
-          <form className={styles.addReviewForm} method="POST" action="">
+          <form
+            className={styles.addReviewForm}
+            name="review_form"
+            method="POST"
+            action=""
+          >
             <div className={styles.row}>
               <input
                 className={styles.title}
+                name="title"
                 type="text"
-                defaultValue="Title"
+                placeholder="Title"
+                onChange={handleChange}
               />
-              <input className={styles.rating} type="number" defaultValue="5" />
+              <input
+                className={styles.rating}
+                name="rating"
+                type="number"
+                defaultValue="5"
+                onChange={handleChange}
+              />
             </div>
             <textarea
               className={styles.body}
+              name="body"
               type="text"
-              defaultValue="Description"
+              placeholder="Description"
+              onChange={handleChange}
             />
             <button
               form="review_form"
               className={styles.addButton}
               type="submit"
+              onClick={handleSubmit}
             >
               ADD
             </button>

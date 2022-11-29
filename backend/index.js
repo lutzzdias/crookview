@@ -8,8 +8,6 @@ const review_controller = require('./controllers/review_controller');
 const item_controller = require('./controllers/item_controller');
 const user_controller = require('./controllers/user_controller');
 
-//const view_controller = require("./frontend/controllers/view_controller");
-
 const app = express();
 const PORT = 3060;
 
@@ -30,11 +28,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-
-// EJS config
-//app.set("view engine", "ejs");
-//app.set("views", "./frontend/views");
-app.use(express.static('./frontend/'));
 
 // Setup cors to integrate front and back
 app.use(cors());
