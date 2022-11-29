@@ -2,6 +2,7 @@ const { Router } = require("express");
 const service = require("../services/user_service");
 const router = Router();
 const passport = require('passport');
+let loggedUserId = null;
 
 router.post("/", service.createUser);
 
@@ -13,7 +14,8 @@ router.post("/login",
     passport.authenticate('local', 
     {failureRedirect: 'login'}),
     (req, res) =>{
-        res.render('/').send(req.user.id);
+        global.loggedUserId = req.user.id;
+        res.render('/');
     }
 );
 

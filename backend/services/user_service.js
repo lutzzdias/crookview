@@ -62,8 +62,13 @@ const handleError = (error, res) => {
   return res.status(500).json({ error: error.message });
 };
 
+const userLogged = async(authenticatedId) =>{
+  let auth = authenticatedId;
+}
+
 module.exports = {
   getUsers,
   getUserById,
   createUser,
+  userLogged
 };

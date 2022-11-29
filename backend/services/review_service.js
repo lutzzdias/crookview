@@ -23,8 +23,9 @@ const getReviewById = async (req, res) => {
 
 const createReview = async (req, res) => {
   // Save info from the request into variables
-  const { title, body, rating, likeCount, date, userId, itemId } = req.body;
-
+  const { title, body, rating, likeCount, itemId } = req.body;
+  const date = Date.now();
+  const userId = loggedUserId;
   try {
     // Validation
     const otherReviewBySameUser = await Review.findAll({
