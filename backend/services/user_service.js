@@ -1,21 +1,10 @@
-const { User } = require("../models");
-const bcrypt = require("bcryptjs");
+const { User } = require('../models');
+const bcrypt = require('bcryptjs');
 
 const getUsers = async (req, res) => {
   try {
     const users = await User.findAll();
     return res.status(200).json(users);
-  } catch (error) {
-    return handleError(error, res);
-  }
-};
-
-const getUserById = async (req, res) => {
-  const id = req.params.id;
-  try {
-    const user = await User.findByPk(id);
-    if (user) return res.status(200).json(user);
-    else return res.status(404).send("User not found.");
   } catch (error) {
     return handleError(error, res);
   }
@@ -36,7 +25,7 @@ const createUser = async (req, res) => {
     const emailExists = await checkEmailExistence(email);
 
     if (emailExists)
-      return res.status(400).send("Email is already registered.");
+      return res.status(400).send('Email is already registered.');
 
     const newUser = await User.create({
       username: username,
@@ -62,13 +51,20 @@ const handleError = (error, res) => {
   return res.status(500).json({ error: error.message });
 };
 
-const userLogged = async(authenticatedId) =>{
-  let auth = authenticatedId;
-}
-
+const getUserById = async (req, res) => {
+  const id = req.params.id;
+  console.log(req);
+  try {
+    const user = await User.findByPk(id);
+    if (user) return res.status(200).json(user);
+    else return res.status(404).send('User not found.');
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
 module.exports = {
   getUsers,
   getUserById,
   createUser,
-  userLogged
+  userLogged,
 };

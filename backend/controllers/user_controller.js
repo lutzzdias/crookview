@@ -1,22 +1,21 @@
-const { Router } = require("express");
-const service = require("../services/user_service");
+const { Router } = require('express');
+const service = require('../services/user_service');
 const router = Router();
 const passport = require('passport');
 let loggedUserId = null;
 
-router.post("/", service.createUser);
+router.post('/', service.createUser);
 
-router.get("/", service.getUsers);
+router.get('/', service.getUsers);
 
-router.get("/:id", service.getUserById);
-
-router.post("/login",
-    passport.authenticate('local', 
-    {failureRedirect: 'login'}),
-    (req, res) =>{
-        global.loggedUserId = req.user.id;
-        res.render('/');
-    }
+router.post(
+  '/login',
+  passport.authenticate('local', { failureRedirect: 'login' }),
+  (req, res) => {
+    res.send(req.user.id);
+  }
 );
+
+router.get('/:id', service.getUserById);
 
 module.exports = router;
