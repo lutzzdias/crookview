@@ -21,7 +21,6 @@ export default function Info(props) {
     getItems().then((res) => setItems(res));
   }, []);
 
-  // TODO: Fix setFormData
   const handleChange = (event) => {
     const target = event.target.name;
     setFormData((prevData) => {
