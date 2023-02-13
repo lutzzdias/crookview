@@ -20,6 +20,6 @@ We opted for a SQL database in order to practice more traditional database struc
 
 After showing the project to the professor, he said the backend was approved. Everything was working, it was well structured and correct. The UI part of the frontend was ok as well, but there was no integration. This happened because the frontend was developed on the last moments before the deadline. Because of that lack of integration we did not get a good grade, but the teacher gave us an opportunity to improve the app and present it to him again. This improvement was to be done individually.
 
-After that, [Lütz](https://github.com/lutzzdias) and [Murilo](https://github.com/MuriloMatias) decided that they would improve the app and their grade. Murilo refactored what was necessary in the backend to integrate with the frontend developed by Lütz. At this moment, the frontend was remade from scratch, using react.
+After that, [Lütz](https://github.com/lutzzdias) and [Murilo](https://github.com/MuriloMatias) decided that they would improve the app and their grade. Murilo refactored what was necessary in the backend to integrate with the frontend developed by Lütz. At this moment, the frontend was remade from scratch, using next and react.
 
 Despite being pretty stressfull and still not resulting in a complete application after the refactoring, this website made us all grow as developers. We learned how to work as a team, new technologies, backend and frontend related problems and challenges (especially dealing with images).
