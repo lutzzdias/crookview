@@ -7,9 +7,16 @@ It was a group project, the 4 members were divided between frontend and backend:
 - [Breno](https://github.com/Breno7K)
 - [Pedro](https://github.com/Pslittee01)
 
+
 **Backend**
 - [Murilo](https://github.com/MuriloMatias)
 - [Lütz](https://github.com/lutzzdias)
+
+
+## Description
+
+This website was supposed to be a place for critics. In it people would be able to add their reviews of movies, books and series. If a particular item was not already on the website (e.g. the movie you watched was not registered yet) the user could register the item and then add their review. All items have the same attributes, with a unique property in order to differentiate them into the correct category. Because of some problems stated in the summary of the repo, the website never completely fulfilled its purpose. There were a few features missing, but the main aspects are working.
+
 
 ## Summary of the story of this repo
 
