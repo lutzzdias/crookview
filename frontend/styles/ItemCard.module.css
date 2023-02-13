@@ -1,0 +1,63 @@
+.item {
+  width: 200px;
+  background-color: #1B263B;
+  border-radius: 15px;
+  margin-top: 15px;
+}
+
+.itemName {
+  transition: all 0.3s ease-in-out;
+  font-weight: 600;
+  font-size: 14px;
+  max-width: 50ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  color: #FFFFFF;
+}
+
+.itemName:hover {
+  color: #FFFFFF !important;
+}
+
+.itemImg {
+  max-width: 200px;
+  max-height: 275px;
+}
+
+.itemType {
+  font-size: 12px;
+  opacity: 0.8;
+  color: #E0E1DD;
+}
+
+.itemDescription {
+  display: block;
+  color: #FFFFFF;
+  font-size: 15px;
+  max-width: 100ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+.itemInstallments {
+  display: block;
+  font-size: 11px;
+}
+
+.itemInfo {
+  padding: 0px 10px 10px 10px;
+  color:#FFFFFF;
+}
+
+.containerImg {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  margin: 10px auto 5px auto;
+  display: block;
+  width: 90%;
+}
